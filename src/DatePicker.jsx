@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useUniqueId } from "./hooks/useId.js";
 
 export const DatePicker = ({
   width = "200px",
@@ -56,6 +57,9 @@ export const DatePicker = ({
   const [showMonthSelector, setShowMonthSelector] = useState(false);
   const [showYearSelector, setShowYearSelector] = useState(false);
   const datePickerRef = useRef(null);
+  const datePickerId = useUniqueId("datepicker");
+  const errorId = useUniqueId("error");
+  const helperId = useUniqueId("helper");
 
   const months = [
     "Enero",
@@ -239,7 +243,7 @@ export const DatePicker = ({
       {/* Label */}
       {label && (
         <label
-          htmlFor={`datepicker-${Math.random().toString(36).substr(2, 9)}`}
+          htmlFor={datePickerId}
           style={{
             display: "block",
             fontSize: "var(--select-font-size)",
@@ -256,8 +260,8 @@ export const DatePicker = ({
       )}
 
       {/* Input Display */}
-      <div
-        id={`datepicker-${Math.random().toString(36).substr(2, 9)}`}
+        <div
+          id={datePickerId}
         role="combobox"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
@@ -265,9 +269,9 @@ export const DatePicker = ({
         aria-invalid={!!error}
         aria-describedby={
           error
-            ? `error-${Math.random().toString(36).substr(2, 9)}`
+            ? errorId
             : helperText
-            ? `helper-${Math.random().toString(36).substr(2, 9)}`
+            ? helperId
             : undefined
         }
         tabIndex={disabled ? -1 : 0}
@@ -357,7 +361,7 @@ export const DatePicker = ({
       {/* Error Message */}
       {error && !isOpen && (
         <div
-          id={`error-${Math.random().toString(36).substr(2, 9)}`}
+          id={errorId}
           style={{
             fontSize: "12px",
             color: "#dc2626",
@@ -377,7 +381,7 @@ export const DatePicker = ({
       {/* Helper Text */}
       {helperText && !error && !isOpen && (
         <div
-          id={`helper-${Math.random().toString(36).substr(2, 9)}`}
+          id={helperId}
           style={{
             fontSize: "12px",
             color: "#6b7280",

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { CustomCheckbox } from "./CustomCheckbox.jsx";
+import { useUniqueId } from "./hooks/useId.js";
 
 export const MultiSelect = ({
   width = "200px",
@@ -45,9 +46,12 @@ export const MultiSelect = ({
   const [selectedValues, setSelectedValues] = useState(value);
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const dropdownRef = useRef(null);
+  const multiselectId = useUniqueId("multiselect");
+  const errorId = useUniqueId("error");
+  const helperId = useUniqueId("helper");
 
   useEffect(() => {
-    setSelectedValues(value);
+    setSelectedValues(value || []);
   }, [value]);
 
   useEffect(() => {
@@ -134,7 +138,7 @@ export const MultiSelect = ({
       {/* Label */}
       {label && (
         <label
-          htmlFor={`multiselect-${Math.random().toString(36).substr(2, 9)}`}
+          htmlFor={multiselectId}
           style={{
             display: "block",
             fontSize: "var(--select-font-size)",
@@ -152,19 +156,13 @@ export const MultiSelect = ({
 
       {/* Input Display */}
       <div
-        id={`multiselect-${Math.random().toString(36).substr(2, 9)}`}
+        id={multiselectId}
         role="combobox"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-required={required}
         aria-invalid={!!error}
-        aria-describedby={
-          error
-            ? `error-${Math.random().toString(36).substr(2, 9)}`
-            : helperText
-            ? `helper-${Math.random().toString(36).substr(2, 9)}`
-            : undefined
-        }
+        aria-describedby={error ? errorId : helperText ? helperId : undefined}
         tabIndex={disabled ? -1 : 0}
         onClick={disabled ? undefined : toggleDropdown}
         onKeyDown={(e) => {
@@ -258,7 +256,7 @@ export const MultiSelect = ({
       {/* Error Message */}
       {error && !isOpen && (
         <div
-          id={`error-${Math.random().toString(36).substr(2, 9)}`}
+          id={errorId}
           style={{
             fontSize: "12px",
             color: "#dc2626",
@@ -278,7 +276,7 @@ export const MultiSelect = ({
       {/* Helper Text */}
       {helperText && !error && !isOpen && (
         <div
-          id={`helper-${Math.random().toString(36).substr(2, 9)}`}
+          id={helperId}
           style={{
             fontSize: "12px",
             color: "#6b7280",

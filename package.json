@@ -1,6 +1,6 @@
 {
   "name": "libreria-selectores-yblair",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Librería moderna de componentes de selección para React",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useUniqueId } from "./hooks/useId.js";
 
 export const BasicSelect = ({
   width = "200px",
@@ -29,9 +30,12 @@ export const BasicSelect = ({
   const [selectedValue, setSelectedValue] = useState(value || "");
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const dropdownRef = useRef(null);
+  const selectId = useUniqueId("select");
+  const errorId = useUniqueId("error");
+  const helperId = useUniqueId("helper");
 
   useEffect(() => {
-    setSelectedValue(value ?? "");
+    setSelectedValue(value || "");
   }, [value]);
 
   useEffect(() => {
@@ -101,7 +105,7 @@ export const BasicSelect = ({
       {/* Label */}
       {label && (
         <label
-          htmlFor={`select-${Math.random().toString(36).substr(2, 9)}`}
+          htmlFor={selectId}
           style={{
             display: "block",
             fontSize: "var(--select-font-size)",
@@ -119,19 +123,13 @@ export const BasicSelect = ({
 
       {/* Input Display */}
       <div
-        id={`select-${Math.random().toString(36).substr(2, 9)}`}
+        id={selectId}
         role="combobox"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-required={required}
         aria-invalid={!!error}
-        aria-describedby={
-          error
-            ? `error-${Math.random().toString(36).substr(2, 9)}`
-            : helperText
-            ? `helper-${Math.random().toString(36).substr(2, 9)}`
-            : undefined
-        }
+        aria-describedby={error ? errorId : helperText ? helperId : undefined}
         tabIndex={disabled ? -1 : 0}
         onClick={disabled ? undefined : toggleDropdown}
         onKeyDown={(e) => {
@@ -306,7 +304,7 @@ export const BasicSelect = ({
       {/* Error Message */}
       {error && !isOpen && (
         <div
-          id={`error-${Math.random().toString(36).substr(2, 9)}`}
+          id={errorId}
           style={{
             fontSize: "12px",
             color: "#dc2626",
@@ -326,7 +324,7 @@ export const BasicSelect = ({
       {/* Helper Text */}
       {helperText && !error && !isOpen && (
         <div
-          id={`helper-${Math.random().toString(36).substr(2, 9)}`}
+          id={helperId}
           style={{
             fontSize: "12px",
             color: "#6b7280",

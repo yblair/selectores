@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useUniqueId } from "./hooks/useId.js";
 
 export const CustomCheckbox = ({
   checked = false,
@@ -24,6 +25,9 @@ export const CustomCheckbox = ({
   ...props
 }) => {
   const [isChecked, setIsChecked] = useState(checked);
+  const checkboxId = useUniqueId("checkbox");
+  const errorId = useUniqueId("error");
+  const helperId = useUniqueId("helper");
 
   // Actualizar el estado interno cuando cambie la prop checked
   React.useEffect(() => {
@@ -55,7 +59,6 @@ export const CustomCheckbox = ({
     }
   };
 
-  const checkboxId = `checkbox-${Math.random().toString(36).substr(2, 9)}`;
 
   return (
     <div
@@ -97,9 +100,9 @@ export const CustomCheckbox = ({
             }}
             aria-describedby={
               error
-                ? `error-${checkboxId}`
+                ? errorId
                 : helperText
-                ? `helper-${checkboxId}`
+                ? helperId
                 : undefined
             }
             aria-invalid={!!error}
@@ -189,7 +192,7 @@ export const CustomCheckbox = ({
       {/* Error Message */}
       {error && (
         <div
-          id={`error-${checkboxId}`}
+          id={errorId}
           style={{
             fontSize: "12px",
             color: "#dc2626",
@@ -209,7 +212,7 @@ export const CustomCheckbox = ({
       {/* Helper Text */}
       {helperText && !error && (
         <div
-          id={`helper-${checkboxId}`}
+          id={helperId}
           style={{
             fontSize: "12px",
             color: "#6b7280",

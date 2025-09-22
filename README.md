@@ -18,7 +18,7 @@ npm install libreria-selectores-yblair
 ## 🎯 Uso
 
 ```jsx
-import { BasicSelect, MultiSelect, DatePicker, CustomCheckbox } from 'libreria-selectores';
+import { BasicSelect, MultiSelect, DatePicker, CustomCheckbox } from 'libreria-selectores-yblair';
 
 // BasicSelect
 <BasicSelect
