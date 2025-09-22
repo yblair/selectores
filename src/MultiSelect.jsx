@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { CustomCheckbox } from "./CustomCheckbox";
+import { CustomCheckbox } from "./CustomCheckbox.jsx";
 
 export const MultiSelect = ({
   width = "200px",

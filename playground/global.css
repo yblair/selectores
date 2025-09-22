@@ -1,0 +1,30 @@
+/* Fuentes por defecto para la librería */
+:root {
+  --select-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  --select-font-size: 14px;
+  --select-font-weight: 400;
+  --select-font-weight-medium: 500;
+  --select-font-weight-semibold: 600;
+}
+
+/* Aplicar fuentes a todos los componentes de la librería */
+.select-component,
+.select-component * {
+  font-family: var(--select-font-family) !important;
+}
+
+/* Scrollbar personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128, 128, 128, 0.664) transparent;
+}
+
+* {
+  scroll-behavior: smooth;
+}

@@ -1,25 +1,49 @@
 {
-  "name": "libreria-selectores",
+  "name": "libreria-selectores-yblair",
   "version": "1.0.0",
-  "description": "libreria de selectores",
+  "description": "Librería moderna de componentes de selección para React",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yblair/selectores.git"
+  },
   "keywords": [
+    "react",
     "dropdown",
     "selector",
-    "react"
+    "multiselect",
+    "datepicker",
+    "checkbox",
+    "ui",
+    "components"
   ],
-  "license": "ISC",
   "author": "yblair",
-  "type": "commonjs",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite",
-    "build": "rollup -c"
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.4",
+    "@babel/preset-react": "^7.27.1",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-node-resolve": "^15.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "vite": "^7.1.6",
-    "@vitejs/plugin-react": "^4.3.4"
+    "rollup": "^4.52.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "vite": "^7.1.6"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "vite",
+    "prepublishOnly": "npm run build"
   }
 }
