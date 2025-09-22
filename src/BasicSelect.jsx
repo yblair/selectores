@@ -13,6 +13,7 @@ export const BasicSelect = ({
   placeholder = "Seleccionar...",
   maxHeight = "240px",
   value,
+  defaultValue,
   focusBorderColor = "#7c3aed",
   hoverBorderColor = "#d1d5db",
   shadowColor = "rgba(0, 0, 0, 0.05)",
@@ -27,7 +28,11 @@ export const BasicSelect = ({
   helperText,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(value || "");
+  const [selectedValue, setSelectedValue] = useState(() => {
+    if (value !== undefined) return value;
+    if (defaultValue !== undefined) return defaultValue;
+    return "";
+  });
   const [hoveredIndex, setHoveredIndex] = useState(-1);
   const dropdownRef = useRef(null);
   const selectId = useUniqueId("select");
@@ -35,7 +40,9 @@ export const BasicSelect = ({
   const helperId = useUniqueId("helper");
 
   useEffect(() => {
-    setSelectedValue(value || "");
+    if (value !== undefined) {
+      setSelectedValue(value);
+    }
   }, [value]);
 
   useEffect(() => {

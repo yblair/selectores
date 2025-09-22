@@ -3,6 +3,7 @@ import { useUniqueId } from "./hooks/useId.js";
 
 export const CustomCheckbox = ({
   checked = false,
+  defaultChecked = undefined,
   onChange,
   disabled = false,
   size = "20px",
@@ -24,15 +25,23 @@ export const CustomCheckbox = ({
   value,
   ...props
 }) => {
-  const [isChecked, setIsChecked] = useState(checked);
+  const [isChecked, setIsChecked] = useState(() => {
+    if (checked !== undefined) return checked;
+    if (defaultChecked !== undefined) return defaultChecked;
+    return false;
+  });
   const checkboxId = useUniqueId("checkbox");
   const errorId = useUniqueId("error");
   const helperId = useUniqueId("helper");
 
-  // Actualizar el estado interno cuando cambie la prop checked
   React.useEffect(() => {
-    setIsChecked(checked);
-  }, [checked]);
+    if (checked !== undefined) {
+      setIsChecked(checked);
+    }
+    if (defaultChecked !== undefined) {
+      setIsChecked(defaultChecked);
+    }
+  }, [checked, defaultChecked]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -58,7 +67,6 @@ export const CustomCheckbox = ({
       onChange(syntheticEvent);
     }
   };
-
 
   return (
     <div
@@ -99,11 +107,7 @@ export const CustomCheckbox = ({
               cursor: disabled ? "not-allowed" : "pointer",
             }}
             aria-describedby={
-              error
-                ? errorId
-                : helperText
-                ? helperId
-                : undefined
+              error ? errorId : helperText ? helperId : undefined
             }
             aria-invalid={!!error}
             required={required}

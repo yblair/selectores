@@ -6,12 +6,13 @@ function App() {
   return (
     <div style={{ padding: "20px" }}>
       <h1>Welcome to the playground</h1>
-      <h2>Basic Select - Moderno</h2>
+      <h2>Basic Select - Con Default Value</h2>
       <BasicSelect
         width="300px"
         label="Selecciona una opción"
         placeholder="Elige una opción"
         required
+        defaultValue="opcion2"
         options={[
           { label: "Opción 1", value: "opcion1" },
           { label: "Opción 2", value: "opcion2" },
@@ -43,13 +44,14 @@ function App() {
       <br />
       <br />
 
-      <h2>Multi Select - Moderno</h2>
+      <h2>Multi Select - Con Default Values</h2>
       <MultiSelect
         width="300px"
         label="Selecciona días de la semana"
         placeholder="Elige los días"
         required
         helperText="Puedes seleccionar múltiples días"
+        defaultValue={["lunes", "viernes"]}
         options={[
           { label: "Lunes", value: "lunes" },
           { label: "Martes", value: "martes" },
@@ -94,13 +96,14 @@ function App() {
       <br />
       <br />
 
-      <h2>Date Picker - Moderno</h2>
+      <h2>Date Picker - Con Default Value</h2>
       <DatePicker
         width="300px"
         label="Selecciona una fecha"
         placeholder="Elige una fecha"
         required
         helperText="Selecciona una fecha válida"
+        defaultValue="2024-06-15"
         minDate="2024-01-01"
         maxDate="2025-12-31"
         onChange={(date) => console.log("Fecha seleccionada:", date)}
@@ -123,22 +126,24 @@ function App() {
       <br />
       <br />
 
-      <h2>Custom Checkbox - Moderno</h2>
+      <h2>Custom Checkbox - Con Default Values</h2>
       <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         <CustomCheckbox
           label="Acepto los términos y condiciones"
           required
           helperText="Debes aceptar para continuar"
+          defaultChecked={true}
           onChange={(e) => console.log("Términos:", e.target.checked)}
         />
         <CustomCheckbox
           label="Recibir notificaciones por email"
-          checked={true}
+          defaultChecked={true}
           onChange={(e) => console.log("Notificaciones:", e.target.checked)}
         />
         <CustomCheckbox
           label="Opción con error"
           error="Este campo es obligatorio"
+          defaultChecked={false}
           onChange={(e) => console.log("Error:", e.target.checked)}
         />
       </div>

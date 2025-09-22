@@ -8,6 +8,7 @@ export const DatePicker = ({
   color = "#1f2937",
   placeholder = "Seleccionar fecha",
   value,
+  defaultValue,
   onChange,
   borderRadius = "8px",
   borderColor = "#e5e7eb",
@@ -48,12 +49,16 @@ export const DatePicker = ({
   ...props
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentDate, setCurrentDate] = useState(
-    value ? new Date(value) : new Date()
-  );
-  const [selectedDate, setSelectedDate] = useState(
-    value ? new Date(value) : null
-  );
+  const [currentDate, setCurrentDate] = useState(() => {
+    if (value !== undefined) return new Date(value);
+    if (defaultValue !== undefined) return new Date(defaultValue);
+    return new Date();
+  });
+  const [selectedDate, setSelectedDate] = useState(() => {
+    if (value !== undefined) return new Date(value);
+    if (defaultValue !== undefined) return new Date(defaultValue);
+    return null;
+  });
   const [showMonthSelector, setShowMonthSelector] = useState(false);
   const [showYearSelector, setShowYearSelector] = useState(false);
   const datePickerRef = useRef(null);
@@ -260,20 +265,14 @@ export const DatePicker = ({
       )}
 
       {/* Input Display */}
-        <div
-          id={datePickerId}
+      <div
+        id={datePickerId}
         role="combobox"
         aria-haspopup="dialog"
         aria-expanded={isOpen}
         aria-required={required}
         aria-invalid={!!error}
-        aria-describedby={
-          error
-            ? errorId
-            : helperText
-            ? helperId
-            : undefined
-        }
+        aria-describedby={error ? errorId : helperText ? helperId : undefined}
         tabIndex={disabled ? -1 : 0}
         onClick={disabled ? undefined : toggleDropdown}
         onKeyDown={(e) => {

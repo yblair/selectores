@@ -41,6 +41,7 @@ export const MultiSelect = ({
   helperText,
   maxSelections,
   showCount = true,
+  defaultValue = [],
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValues, setSelectedValues] = useState(value);
@@ -51,8 +52,13 @@ export const MultiSelect = ({
   const helperId = useUniqueId("helper");
 
   useEffect(() => {
-    setSelectedValues(value || []);
-  }, [value]);
+    if (value !== undefined) {
+      setSelectedValues(value);
+    }
+    if (defaultValue !== undefined) {
+      setSelectedValues(defaultValue);
+    }
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
