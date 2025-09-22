@@ -12,7 +12,7 @@ Una librería moderna de componentes de selección para React con diseño person
 ## 📦 Instalación
 
 ```bash
-npm install libreria-selectores
+npm install libreria-selectores-yblair
 ```
 
 ## 🎯 Uso
