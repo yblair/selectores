@@ -1,0 +1,25 @@
+{
+  "name": "libreria-selectores",
+  "version": "1.0.0",
+  "description": "libreria de selectores",
+  "keywords": [
+    "dropdown",
+    "selector",
+    "react"
+  ],
+  "license": "ISC",
+  "author": "yblair",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "vite": "^7.1.6",
+    "@vitejs/plugin-react": "^4.3.4"
+  }
+}
